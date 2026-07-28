@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <style>
+        #container{
+            border: 1px solid red;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #card{
+            border: 1px solid black;
+            height: 60%;
+            width: 70%;
+            padding: 10px;
+        }
+        #taskContainer{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="card">
+            <div class="input-group mb-3">
+                <input id="title" type="text" class="form-control" placeholder="Enter Task" aria-label="Recipient’s username" aria-describedby="button-addon2">
+                <button onclick="handleSubmit()" class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+            </div>
+            <!-- hardcode -->
+            <div id="taskContainer">
+                
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+<script>
+    let todos=[]
+    let text=document.getElementById("title") // learn mearn
+
+    let handleSubmit=()=>{
+        console.log("clicked")
+        let task={
+            title:text.value,
+            status:false
+        }
+        todos.push(task)
+        // 
+        render()
+    }
+    let taskContainer =document.getElementById("taskContainer")
+
+    let render=()=>{
+        // [{title:"Mern",status:false},{title:"Mern",status:false}]
+        taskContainer.innerHTML=""
+        todos.forEach((el,i)=>{
+            taskContainer.innerHTML+=`
+            <div style="border-bottom: 1px solid blue;
+                    display:flex;justify-content: space-between;">
+                <p>${el.title}</p>
+                <button onclick="deleteFunction(${i})" type="button" class="btn btn-light">❌</button>
+            </div>
+            `
+        })
+    }
+    let deleteFunction=(i)=>{
+        todos.splice(i,1)
+        render()
+    }
+</script>

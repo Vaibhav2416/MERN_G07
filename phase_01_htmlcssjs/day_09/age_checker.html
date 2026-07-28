@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" name="" id="age">
+    <button id="submitBtn"></button>
+    <p id="para"></p>
+</body>
+<script>
+    let age = document.getElementById("age");
+    let subBtn = document.getElementById("submitBtn");
+    let txt = document.getElementById("para");
+    subBtn.addEventListener("click" , ()=>{
+        let userAge = age.value;
+        if(userAge >= 18){
+            txt.textContent = "You r eligible✅";
+        }
+        else{
+            txt.textContent = "You  r not eligible ❌";
+        }
+    })
+
+</script>
+</html>
