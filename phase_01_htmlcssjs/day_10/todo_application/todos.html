@@ -29,7 +29,8 @@
 <body>
     <div id="container">
         <div id="card">
-            <div class="input-group mb-3">
+            <h3>Todo Tracker</h3>
+            <div class="input-group mb-3 mt-3">
                 <input id="title" type="text" class="form-control" placeholder="Enter Task" aria-label="Recipient’s username" aria-describedby="button-addon2">
                 <button onclick="handleSubmit()" class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
             </div>
@@ -60,12 +61,19 @@
 
     let render=()=>{
         // [{title:"Mern",status:false},{title:"Mern",status:false}]
+        console.log("todos",todos)
         taskContainer.innerHTML=""
         todos.forEach((el,i)=>{
             taskContainer.innerHTML+=`
             <div style="border-bottom: 1px solid blue;
                     display:flex;justify-content: space-between;">
-                <p>${el.title}</p>
+                <p style="cursor:pointer;
+                text-decoration: 
+                ${el.status==true?'line-through':"none"};
+                "    
+                onclick="togleStatus(${i})"
+                >     
+                    ${el.title}</p>
                 <button onclick="deleteFunction(${i})" type="button" class="btn btn-light">❌</button>
             </div>
             `
@@ -73,6 +81,13 @@
     }
     let deleteFunction=(i)=>{
         todos.splice(i,1)
+        render()
+    }
+    let togleStatus=(index)=>{
+// [{title:"Mern",status:false},{title:"Html",status:false}]
+        todos[index].status=!todos[index].status
+                    //    = !false--> true
+                    //    = !true---> false
         render()
     }
 </script>

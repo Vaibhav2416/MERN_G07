@@ -47,7 +47,21 @@
 // // custom index
 // console.log(num)
 
-let numbers=[20,50,70,80,40]
-let piece=numbers.slice(1,4) // (start, end)
-console.log(piece)
+// let numbers=[20,50,70,80,40]
+// let piece=numbers.slice(1,4) // (start, end)
+// console.log(piece)
 
+// let arr=["Html","css","js"]
+// arr.shift() 
+// console.log(arr) // ["css","js"]
+
+// let arr=["Html","css","js"]
+// arr.unshift("React")  //
+// console.log(arr)// ["React","Html","css","js"]
+
+// let arr=["Html","css","js"]
+// arr.splice(1,0) // a,b  // ["Html","css","js"]
+// arr.splice(1,1,"Angular","Node")  // ["Html","Angular","Node","js"]
+
+// let arr=["Html","css","js","react","angular"]
+// arr.slice(1,4)  // ["css","js","react"]
