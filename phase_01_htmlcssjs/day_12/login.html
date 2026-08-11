@@ -83,11 +83,14 @@
         // {"email":"aman@gmail.com","password":123} == aman@gmail.com
         console.log(verified_user) 
         if(verified_user && verified_user.userpassword==password.value){
-            alert("User Logged In Successfully")
+        localStorage.setItem("current_user",JSON.stringify(verified_user))
+        localStorage.setItem("isLoggedIn","true")
+        alert("User Logged In Successfully")
+        window.location.href="products.html"
         }else{
             alert("Invalid Credentials")
         }
-
-        
+        // amazon ==> register ==> login (credentials entered) 
+        // backend ==> token ==> user information present here
     }
 </script>
