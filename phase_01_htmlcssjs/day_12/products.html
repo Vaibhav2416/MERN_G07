@@ -10,6 +10,11 @@
         <h1>Product Page</h1>
         <h3 id="name">Name: </h3>
         <button onclick="handleLogout()">Logout</button>
+        <a href="cart.html">Cart Page</a>
+        <b></b>
+        <div id="cards">
+
+        </div>
     </div>
     <div id="FalseUser">
         
@@ -19,11 +24,11 @@
 <script>
     let container=document.getElementById("container")
     let falseUser=document.getElementById("FalseUser")
-    let check_status=localStorage.getItem("isLoggedIn")
-    let current_user=JSON.parse(localStorage.getItem("current_user"))
+    let check_status=sessionStorage.getItem("isLoggedIn")
+    let current_user=JSON.parse(sessionStorage.getItem("current_user"))
     let name=document.getElementById("name")
+    let cards=document.getElementById("cards")
 
-    console.log(check_status)
     if(check_status=="true"){
         name.innerHTML=`<h1>Name:${current_user.username}</h1>`
         container.style.display="block" // show content 
@@ -34,12 +39,47 @@
     }
 
     let handleLogout=()=>{
-        localStorage.removeItem("isLoggedIn")
-        localStorage.removeItem("current_user")
+        sessionStorage.removeItem("isLoggedIn")
+        sessionStorage.removeItem("current_user")
         window.location.reload()
     }
     // signup => name,email,password  => localstorage (setItem)
     // login page => verified user by making get request (getItem)
     // product => if user present then show main content
     //        => otherwise we redirected user to login page 
+
+    // fetch ==> .then method ==> async await
+    let items=[]
+    let fetchData=async()=>{
+        let resp=await fetch("https://dummyjson.com/products")
+        let data=await resp.json()
+        let products=data.products
+        items=products
+        localStorage.setItem("products",JSON.stringify(products))
+        
+        // [{"id":1,"title":"Laptop","images":[]}]
+        products.forEach(element => {
+            cards.innerHTML+=`
+                <h3>${element.id}</h3>
+                <h3>${element.title}</h3>
+                <img height="100px" src="${element.images[0]}">
+                <button onclick="handleCart(${element.id})">Add to Cart</button>
+            `
+        });
+
+    } 
+    fetchData()
+
+    let handleCart=(id)=>{
+        alert(`clicked ${id}`)
+        let matchedObject=items.find((el)=>el.id==id)
+        console.log(matchedObject)
+        let cartItems=JSON.parse(localStorage.getItem("cart")) || []
+        // if cartItems already present in storage then 
+        // just bring them and store new Item 
+        // otherwise just create empty array and push first product
+        cartItems.push(matchedObject)
+        localStorage.setItem("cart",JSON.stringify(cartItems))
+
+    }
 </script>

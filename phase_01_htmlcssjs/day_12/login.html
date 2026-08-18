@@ -83,8 +83,12 @@
         // {"email":"aman@gmail.com","password":123} == aman@gmail.com
         console.log(verified_user) 
         if(verified_user && verified_user.userpassword==password.value){
-        localStorage.setItem("current_user",JSON.stringify(verified_user))
-        localStorage.setItem("isLoggedIn","true")
+        // localStorage.setItem("current_user",JSON.stringify(verified_user))
+        // localStorage.setItem("isLoggedIn","true")
+
+        sessionStorage.setItem("current_user",JSON.stringify(verified_user))
+        sessionStorage.setItem("isLoggedIn","true")
+
         alert("User Logged In Successfully")
         window.location.href="products.html"
         }else{
@@ -93,4 +97,12 @@
         // amazon ==> register ==> login (credentials entered) 
         // backend ==> token ==> user information present here
     }
+
+    // Session Storage
+    // It will store data in browser temprorily means
+    // for current session or till browser or tab closes
+
+    // getItem
+    // setItem
+
 </script>
