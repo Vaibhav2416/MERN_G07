@@ -1,7 +1,12 @@
 const express=require("express") // importing express
 const app=express()  // connecting express with our application
 const fs=require("fs")
-app.use(express.json())
+app.use(express.json()) 
+// when req.body comes from client , express
+// can't identitify which type of content coming
+// from client whether it is file type, text type
+// or json type, so we need to mention explicitly
+// that req.body is coming as json data
 
 app.get("/",(req,res)=>{
     res.send("Welcome to home page")
@@ -19,8 +24,12 @@ app.post("/users",(req,res)=>{
     const users=JSON.parse(data)
     // first we need to read data from file and then push 
     // new data coming from client or frontend
-    console.log(req.body)
-    res.send("Making Post request")
+    const users_array=users.users
+    console.log(users_array)
+    const newUser=req.body
+    users_array.push(newUser)
+    fs.writeFileSync("db.json",JSON.stringify(users_array))
+    res.send("User Saved Successfully, please check db.json")
 })
 
 app.listen(8080,()=>{
